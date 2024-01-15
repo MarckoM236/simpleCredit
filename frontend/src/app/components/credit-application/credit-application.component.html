@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col" *ngIf="role === 'Client'">
+        <div class="container mt-5">
+            <h3 class="mb-5">Solicitar Credito</h3>
+            <form (ngSubmit)="applicationCredit()">
+                <div class="input-group flex-nowrap mb-3">
+                    <span class="input-group-text" id="addon-wrapping"></span>
+                    <input type="text" class="form-control" placeholder="Valor del credito" aria-label="credit_value" aria-describedby="addon-wrapping" name="credit_value" [(ngModel)]="credit_value" >
+                </div>
+        
+                <div class="input-group flex-nowrap mb-3">
+                    <span class="input-group-text" id="addon-wrapping"></span>
+                    <input type="email" class="form-control" placeholder="Cantidad de cuotas" aria-label="dues" aria-describedby="addon-wrapping" name="dues" [(ngModel)]="dues">
+                </div>
+        
+                <div class="input-group flex-nowrap mb-3">
+                    <select class="form-select" name="credit_type" [(ngModel)]="credit_type">
+                        <option selected value="">Seleccione tipo de credito</option>
+                        <option value="1">Libre Inversion</option>
+                        <option value="2">Vivienda</option>
+                      </select>
+                </div>
+
+                <div class="input-group flex-nowrap mb-3">
+                    <span class="input-group-text" id="addon-wrapping"></span>
+                    <textarea type="text" class="form-control" placeholder="Por que solicita el credito?" aria-label="description" aria-describedby="addon-wrapping" name="description" [(ngModel)]="description"></textarea>
+                </div>
+        
+                <button type="submit" class="btn btn-primary mb-3" >Guardar</button>
+            </form>
+            <div class="alert alert-danger" *ngIf="alert.length>0">
+                <span><strong> {{alert}} </strong></span>
+            </div>
+            <div class="alert alert-success" *ngIf="success !==''">
+                <span><strong> {{success}} </strong></span>
+            </div>  
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="container mt-5">
+            <h3 class="mb-5">Solicitudes de Credito</h3>
+
+            <table class="table">
+                <div class="alert alert-danger" *ngIf="status_alert.length>0">
+                    <span><strong> {{status_alert}} </strong></span>
+                </div>
+                <div class="alert alert-success" *ngIf="status_success !==''">
+                    <span><strong> {{status_success}} </strong></span>
+                </div>  
+                <thead>
+                <tr>
+                    <th scope="col">Nombre Cliente</th>
+                    <th scope="col">Valor Credito</th>
+                    <th scope="col"># Cuotas</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Fecha Solicitud</th>
+                    <th scope="col" *ngIf="role !== 'Administrator'">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let application of applications">
+                    <th>{{application.user_name}}</th>
+                    <td>{{application.credit_value}}</td>
+                    <td>{{application.dues}}</td>
+                    <td>{{application.status}}</td>
+                    <td>{{application.created_at}}</td>
+                    <td *ngIf="role !== 'Administrator'"><span class="text-success" (click)="status('approved',application.id)" *ngIf="role !== 'Client' && application.status !== 'reject' && application.status !== 'cancelled' && application.status !== 'approved'"><i class="fa-solid fa-thumbs-up"></i></span> &nbsp;||&nbsp; <span class="text-danger" (click)="status('rejected',application.id)" *ngIf="application.status !== 'rejected' && application.status !== 'cancelled' && application.status !== 'approved'"><i class="fa-solid fa-ban"></i></span></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>

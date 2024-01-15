@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <div class="col-lg-6 offset-lg-3 text-center mb-5" >
+        <h3>Registro de Clientes</h3>
+    </div>
+    <form (ngSubmit)="RegisterClient()">
+        <div class="input-group flex-nowrap mb-3">
+            <span class="input-group-text" id="addon-wrapping"></span>
+            <input type="text" class="form-control" placeholder="name" aria-label="name" aria-describedby="addon-wrapping" name="name" [(ngModel)]="name">
+        </div>
+
+        <div class="input-group flex-nowrap mb-3">
+            <span class="input-group-text" id="addon-wrapping"></span>
+            <input type="email" class="form-control" placeholder="email" aria-label="email" aria-describedby="addon-wrapping" name="email" [(ngModel)]="email">
+        </div>
+
+        <div class="input-group flex-nowrap mb-3">
+            <span class="input-group-text" id="addon-wrapping"></span>
+            <input type="password" class="form-control" placeholder="********" aria-label="password" aria-describedby="addon-wrapping" name="password" [(ngModel)]="password">
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-3" >Registrar</button>
+    </form>
+    <div class="container" *ngIf="alert.length>0">
+        <span class="text-danger" ><strong> {{alert}} </strong></span>
+    </div>
+  
+</div>

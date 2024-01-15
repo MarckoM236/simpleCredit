@@ -1,0 +1,41 @@
+<div class="container mt-5" >
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3 text-center" >
+        <img src="../../../assets/img/banco.png" alt="bancoIA" width="200">
+        <h3>Banco IA</h3>
+      </div>
+    </div>
+    
+    <div class="row mt-5">
+      <div class="col-lg-6 offset-lg-3">
+        <form (ngSubmit)="login()">
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input type="email" id="form2Example1" class="form-control" name="email" [(ngModel)]="email"/>
+            <label class="form-label" for="form2Example1">Direccion de Email</label>
+          </div>
+        
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+            <input type="password" id="form2Example2" class="form-control" name="password" [(ngModel)]="password"/>
+            <label class="form-label" for="form2Example2">Contraseña</label>
+          </div>
+        
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary btn-block mb-4">Ingresar</button>
+        
+          <!-- Register buttons -->
+          <div class="text-center ">
+            <p>No eres un cliente? <a href="/register">Registrarse</a></p>
+          </div>
+        </form>
+
+        <div class="alert alert-danger" *ngIf="error_status">
+          <span>{{error_msg}}</span>
+        </div>
+        
+      </div>
+    </div>
+
+      
+</div>

@@ -1,0 +1,58 @@
+<div class="container mt-5">
+    <h3>Creditos</h3>
+    <div class="row">
+        <div class="col-lg-2 offset-lg-10">
+            <button class="btn btn-primary" routerLink="/creditsApl">Solicitud de Credito</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col"># Cuenta</th>
+                    <th scope="col">Valor Credito</th>
+                    <th scope="col"># Cuotas</th>
+                    <th scope="col">valor Cuota</th>
+                    <th scope="col">Nombre del Cliente</th>
+                    <th scope="col">Aprobado Por</th>
+                    <th scope="col">Tipo de Credito</th>
+                    <th scope="col">Fecha de Aprobacion</th>
+                    <th scope="col" *ngIf="role === 'Client'">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="credits.length > 0">
+                  <tr *ngFor="let credit of credits; let i = index" >
+                    <th scope="row">{{credit.account_number}}</th>
+                    <td>{{credit.credit_value}}</td>
+                    <td>{{credit.dues}}</td>
+                    <td>{{credit.due_value}}</td>
+                    <td>{{credit.name_client}}</td>
+                    <td>{{credit.name_approver}}</td>
+                    <td>{{credit.credit_name}}</td>
+                    <td>{{credit.approval_date}}</td>
+                    <td *ngIf="role === 'Client'"><span class="text-success" (click)="creditDetail(i)"><i class="fa-solid fa-eye"></i></span></td>
+                  </tr>
+                </tbody>
+                <tr *ngIf="credits.length === 0">
+                  <td>No hay Creditos disponibles</td>
+                </tr>
+              </table>
+        </div>
+
+        <div class="col" *ngIf="role === 'Client'">
+          <div class="card" style="width: 18rem;" *ngIf="show">
+            <div class="card-body">
+              <h5 class="card-title">Detalle del Credito</h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary"><hr></h6>
+              <p class="card-text"><strong>Valor Aprobado:</strong> {{credit_detail.credit_value}} </p>
+              <p class="card-text"><strong>Numero de Cuotas:</strong> {{credit_detail.dues}} </p>
+              <p class="card-text"><strong>Tipo de Credito:</strong> {{credit_detail.credit_name}} </p>
+              <p class="card-text"><strong>% interes:</strong> {{credit_detail.credit_percentage}} </p>
+              <p class="card-text"><strong>Calculo valor de cuota:</strong>  </p>
+              <p class="card-text">{{msg_openIA}}</p>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
