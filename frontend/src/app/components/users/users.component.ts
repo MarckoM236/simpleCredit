@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import { RefreshService } from 'src/app/services/refresh.service';
 import { UserInfoService } from 'src/app/services/user-info.service';
 
 @Component({
@@ -21,9 +22,10 @@ export class UsersComponent {
   users:any[]=[];
   user_edit:any[]=[]
 
-  constructor(private _api:ApiService,private _user:UserInfoService){}
+  constructor(private _api:ApiService,private _user:UserInfoService,private _refresh:RefreshService){}
 
   ngOnInit():void{
+    this._refresh.emitEvent(true);
     this.listUsers();
   }
 
